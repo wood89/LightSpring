@@ -42,3 +42,20 @@
     <constructor-arg type="java.lang.String"  value = "John Smith"/>
     </bean>
 Это позволяет не привязываться к индексам.
+
+Также можно записать в таком виде, но это будет работать только при включенных debug symbols. А как их включить хз.
+    <bean id="client" class="Client">
+    <constructor-arg name="arg1"  value = "1"/>
+    <constructor-arg name="arg2"  value = "John Smith"/>
+    </bean>
+Итак, мы вынесли статическую информацию во внешний конфигурационный файл (context.xml). Это конечно не property файл, но его можно закоммитить и изменениям он будет производиться намного легче.
+
+
+
+Как же проинжектить сами бины друг в друга!!!
+
+Для того чтобы сделать бины в app есть ref:
+    <bean id="app" class="App">
+        <constructor-arg ref="client"/>
+        <constructor-arg ref="eventLogger"/>
+    </bean>
